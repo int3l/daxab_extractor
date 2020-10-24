@@ -7,7 +7,7 @@ from base64 import b64decode
 from json import loads
 
 
-HEADERS={
+HEADERS = {
     'Accept': 'text/html',
     'Accept-Encoding': 'gzip',
     'User-Agent': 'Mozilla/5.0',
@@ -39,7 +39,7 @@ def extract(url):
         html = gzip.decompress(response.read()).decode('utf-8')
 
     if match := VIDEO_INFO_PATTERN.search(html):
-        info = re.sub("\s(\w+):", r'"\1":',  match.group('info'), re.DOTALL)
+        info = re.sub(r'\s(\w+):', r'"\1":',  match.group('info'), re.DOTALL)
         try:
             info = loads(info)
         except Exception:
@@ -91,5 +91,5 @@ def main():
 if __name__ == '__main__':
     try:
         exit(main())
-    except KeybaordInterrupt:
+    except KeyboardInterrupt:
         raise SystemExit(130)
